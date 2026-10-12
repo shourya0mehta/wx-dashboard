@@ -873,7 +873,8 @@ td.num, td.r { font-variant-numeric: tabular-nums; }
       <div class="band-cell">
         <p class="label">Account value</p>
         <p class="hero">${usd(m.equity)}</p>
-        <p class="sub"><strong class="${tone(m.pnl_since_start)}">${signed(m.pnl_since_start)}</strong> profit since ${esc(startLabel)}, after ${usd(m.fees_since_start)} in fees</p>
+        ${isNum(m.account_change) ? `<p class="sub"><strong class="${tone(m.account_change)}">${signed(m.account_change)}</strong> since the ${usd(s.start && s.start.bankroll)} start on ${esc(startLabel)}</p>` : ""}
+        <p class="sub">Settled bets alone: <strong class="${tone(m.pnl_since_start)}">${signed(m.pnl_since_start)}</strong>, after ${usd(m.fees_since_start)} in fees</p>
         <p class="sub">${m.equity_estimated ? "Estimated from the starting " + usd(s.start && s.start.bankroll) + " and settled results: the bot's own reading was not available." :
           isNum(m.equity_marked) ? `Counting open bets at today's prices: ${usd(m.equity_marked)}` : ""}</p>
       </div>
